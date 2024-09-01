@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model User {
+    id          Int @id @default(autoincrement())
+    username    String @unique
+    email       String @unique
+    password    String
+    groups      Group[] @relation("UserGroups")
+    adminGroups Group[] @relation("GroupAdmin")
+    gifts       Gifts[]
+}
+
+model Gifts {
+    id                  Int @id @default(autoincrement())
+    
+    userOwner           User @relation(fields: [userOwnerId], references: [id])
+    userOwnerId         Int
+    
+    title               String
+    description         String?
+    linkImage           String?
+    redirectLink        String?
+    
+    relationGroups     GroupGift[]
+}
+
+model GroupGift {
+    id              Int @id @default(autoincrement())
+
+    gift Gifts      @relation(fields: [giftId], references: [id])
+    giftId          Int
+
+    group Group     @relation(fields: [groupId], references: [id])
+    groupId         Int
+
+    @@unique([groupId, giftId])
+}
+
+model Group {
+    id Int @id @default(autoincrement())
+    groupName String
+    linkImage String
+
+    adminUser User @relation("GroupAdmin", fields: [adminUserId], references: [id])
+    adminUserId Int
+
+    usersList User[] @relation("UserGroups")
+
+    relationGifts GroupGift[]
+}
