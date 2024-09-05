@@ -1,4 +1,4 @@
-export class GiftIdentity {
+export class GiftEntity {
     constructor(
         public id: number,
         public userOwnerId: number,
@@ -16,6 +16,6 @@ export class GiftIdentity {
         if(!userOwnerId) throw 'User Id is required';
         if(!title) throw 'User Id is required';
 
-        return new GiftIdentity(id, userOwnerId, title, description, linkImage, redirectLink)
+        return new GiftEntity(id, userOwnerId, title, description, linkImage, redirectLink)
     }
 }
