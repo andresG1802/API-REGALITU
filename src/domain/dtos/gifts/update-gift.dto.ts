@@ -1,4 +1,4 @@
-export class UpdateGift {
+export class UpdateGiftDto {
     private constructor(
         public id: number,
         public userOwnerId: number,
@@ -23,7 +23,7 @@ export class UpdateGift {
         return returnObj;
     }
 
-    static create( props: {[key:string]: any} ): [string?, UpdateGift?] {
+    static create( props: {[key:string]: any} ): [string?, UpdateGiftDto?] {
         
         const { id, userOwnerId, title, description, linkImage, redirectLink} = props;
         
@@ -31,6 +31,6 @@ export class UpdateGift {
             return ['gift id must be a valid number'];
         }
 
-        return [undefined, new UpdateGift(id, userOwnerId, title, description, linkImage, redirectLink)];
+        return [undefined, new UpdateGiftDto(id, userOwnerId, title, description, linkImage, redirectLink)];
     }
 }
