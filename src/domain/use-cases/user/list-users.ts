@@ -1,11 +1,11 @@
 import { UserRepository } from "../../repositories/user.repository";
 import { UserEntity } from "../../entities/user.entity";
 
-export interface ListUserUseCase{
+export interface ListUsersUseCase{
     execute(): Promise<UserEntity[]>
 }
 
-export class ListUser implements ListUserUseCase {
+export class ListUsers implements ListUsersUseCase {
     constructor(
         private readonly repository: UserRepository,
     ){}

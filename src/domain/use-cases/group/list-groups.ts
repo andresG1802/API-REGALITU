@@ -1,11 +1,11 @@
 import { GroupRepository } from "../../repositories/group.repository";
 import { GroupEntity } from "../../entities/group.entity";
 
-export interface ListGroupUseCase{
+export interface ListGroupsUseCase{
     execute(): Promise<GroupEntity[]>
 }
 
-export class ListGroup implements ListGroupUseCase {
+export class ListGroups implements ListGroupsUseCase {
     constructor(
         private readonly repository: GroupRepository,
     ){}

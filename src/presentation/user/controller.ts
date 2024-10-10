@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../data/postgres";
 import { CreateUserDto, UpdateUserDto } from "../../domain/dtos";
-import { CreateUser, DeleteUser, GetUser, ListUser, UserRepository, UpdateUser } from "../../domain";
+import { CreateUser, DeleteUser, GetUser, ListUsers, UserRepository, UpdateUser } from "../../domain";
 
 export class UserController {
     
@@ -10,8 +10,8 @@ export class UserController {
     ) {}
 
     // "lo raro es que express recomiendo no utilizar aync" -galvan
-    public listUser = (req:Request, res:Response) => {
-        new ListUser(this.userRepository)
+    public listUsers = (req:Request, res:Response) => {
+        new ListUsers(this.userRepository)
         .execute()
         .then(users => res.json(users))
         .catch(error => res.status(400).json({error}));

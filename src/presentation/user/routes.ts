@@ -15,7 +15,7 @@ export class UserRoutes {
 
         const userController = new UserController(userRepository);
 
-        router.get('/', userController.listUser);
+        router.get('/', userController.listUsers);
         router.get('/:id', userController.getUserById);
         
         // for some reason, aqui hay un error
