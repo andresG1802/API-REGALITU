@@ -5,7 +5,7 @@ export interface GetGiftUseCase {
     execute(id:number): Promise<GiftEntity>
 }
 
-export class GetPaciente implements GetGiftUseCase {
+export class GetGift implements GetGiftUseCase {
     constructor(
         private readonly repository: GiftRepository
     ){}
