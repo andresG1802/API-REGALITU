@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { GiftController, GiftController } from "./controller";
+import { GiftController } from "./controller";
 import { GiftDatasourceImpl } from "../../infrastructure/datasource/gift.data.impl";
 import { GiftRepositoryImpl } from "../../infrastructure/repositories/gift.repository.impl";
 

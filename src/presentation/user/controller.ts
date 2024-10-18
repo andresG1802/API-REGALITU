@@ -26,9 +26,9 @@ export class UserController {
         .catch(error=>res.status(400).json({error}));
     };
 
-    public createUser = (req:Request, res:Response)=>{
+    public createUser = (req:Request, res:Response): void =>{
         const [error,createUserDto] = CreateUserDto.create(req.body);
-        if(error) return res.status(400).json({error});
+        if(error) { res.status(400).json({error}); return; }
 
         new CreateUser(this.userRepository)
             .execute( createUserDto! )
@@ -36,10 +36,10 @@ export class UserController {
             .catch(error => res.status(400).json({error}));
     };
 
-    public updateUser = (req:Request,res:Response) => {
+    public updateUser = (req:Request,res:Response): void => {
         const id = +req.params.id;
         const [error,updateUserDto] = UpdateUserDto.create({...req.body,id});
-        if(error) return res.status(400).json({error});
+        if(error) { res.status(400).json({ error }); return; }
 
         new UpdateUser(this.userRepository)
             .execute(updateUserDto!)

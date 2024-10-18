@@ -25,9 +25,9 @@ export class GroupController {
         .catch(error=> res.status(400).json({error}));
     };
 
-    public createGroup = (req: Request, res:Response)=>{
+    public createGroup = (req: Request, res:Response): void =>{
         const [error, createGroupDto] = CreateGroupDto.create(req.body);
-        if(error) return res.status(400).json({error});
+        if(error) { res.status(400).json({error}); return; }
 
         new CreateGroup(this.groupRepository)
             .execute( createGroupDto! )
@@ -35,10 +35,10 @@ export class GroupController {
             .catch(error => res.status(400).json({error}))
     };
 
-    public updateGroup = (req:Request, res:Response) => {
+    public updateGroup = (req:Request, res:Response): void => {
         const id = +req.params.id;
         const [error, updateGroupDto] = UpdateGroupDto.create({...req.body, id});
-        if (error) return res.status(400).json({error});
+        if (error) { res.status(400).json({error}); return; }
 
         new UpdateGroup(this.groupRepository)
             .execute(updateGroupDto!)

@@ -25,9 +25,9 @@ export class GiftController {
             .catch(error=>res.status(400).json({error}))
     }
 
-    public createGift = (req:Request, res:Response) => {
+    public createGift = (req:Request, res:Response): void => {
         const [error, createGiftDto] = CreateGiftDto.create(req.body);
-        if (error) return res.status(400).json({error});
+        if (error){ res.status(400).json({error}); return; }
 
         new CreateGift(this.giftRepository)
             .execute( createGiftDto! )
@@ -35,11 +35,11 @@ export class GiftController {
             .catch(error=>res.status(400).json({error}));
     };
 
-    public updateGift = (req:Request, res:Response )=>{
+    public updateGift = (req:Request, res:Response ): void =>{
         const id =+req.params.id;
 
         const [error, updateGiftDto] = UpdateGiftDto.create({...req.body, id});
-        if(error) return res.status(400).json({error});
+        if(error) { res.status(400).json({error}); return; }
 
         new UpdateGift(this.giftRepository)
             .execute(updateGiftDto!)
